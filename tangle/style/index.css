@@ -1,0 +1,115 @@
+*{
+	margin:0px;
+	padding:0px;
+	
+}
+body
+{
+	background:#353540;
+}
+.first-block{
+	height:70vh;
+	padding-top:5%;
+	padding-bottom:5%;
+	padding-left:15%;
+	width:80%;
+}
+.blackback{
+	padding:-1%;
+	width:90%;
+}
+.second-block{
+	height:100vh;
+	width:100%;
+	background-image: url('../media/img/vanya_podlozhka-01.png');
+	
+	
+}
+.third-block{
+	height:100vh;
+	width:100%;
+}
+@font-face {
+	font-family: TruthCYR Regular Regular;
+	src: url('../fonts/truthcyr-regular_bigfontsite.com.otf');
+}
+h1{
+	font-family: TruthCYR Regular Regular;
+	color: white;
+	font-size: 420%;
+	margin: 50px 0% 10px 32%;
+	padding-bottom: 50px;
+}
+h2
+{
+	font-family: TruthCYR Regular Regular;
+	color: white;
+	font-size: 300%;
+	margin: 5px 0% 10px 25%;
+	
+}
+g{
+	font-family: TruthCYR Regular Regular;
+	color: #f2b614;
+	font-size: 100%;
+	margin: 5px 0% 5px -5%;
+}
+b{
+	
+	color: #0e80b5;
+}
+a {
+	font-family: TruthCYR Regular Regular;
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  width: 140px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 45px;
+  margin: -5px 1px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0,0,0,.1);
+  transition: .3s;
+}
+a:hover {
+  background: #353540;
+  box-shadow: 0 15px 20px #0e80b5;
+  color: white;
+  transform: translateY(-7px);
+}
+
+a1 {
+	font-family: TruthCYR Regular Regular;
+  text-decoration: none;
+  outline: none;
+  display: inline-block;
+  width: 280px;
+  height: 45px;
+  line-height: 45px;
+  border-radius: 20px;
+  margin: 5px 1px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 15px;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 3px;
+  font-weight: 600;
+  color: #524f4e;
+  background: white;
+  box-shadow: 0 8px 15px rgba(0,0,0,.1);
+  transition: .3s;
+}
+a1:hover {
+  background: #0e80b5;
+  box-shadow: 0 15px 20px #0e80b5;
+  color: white;
+  transform: translateY(-7px);
+}

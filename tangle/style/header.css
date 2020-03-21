@@ -1,0 +1,23 @@
+header ul{
+	list-style-type:none;
+}
+header ul li{
+	font-family: TruthCYR Regular Regular;
+	float:right;
+	margin-right:5%;
+	
+}
+header{
+	margin:10px auto 0 0;
+	position: sticky;
+	padding:2%;
+	top:0px;
+	background:#FFFFFF;
+	min-height:5vh;
+	
+}
+img{
+	position: relative;
+	right: 200%;
+	/*margin: 10px 0% 10px 32%;*/
+}
