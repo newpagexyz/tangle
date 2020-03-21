@@ -30,7 +30,7 @@
 
 	    window.onload=function(){
  var platform = new H.service.Platform({
-  'apikey': '{Xr86olRRYlJEGra77BlgSuDnyQaiQKvkjqZ_L88aFoo}'
+  'apikey': '{JS_API_KEY}'
 });
  
  // Obtain the default map types from the platform object:
