@@ -1,6 +1,6 @@
 <?php
 	$mysql=array(
-	'host'		=>'127.0.0.1',
+	'host'		=>'host',
 	'user'		=>'user',
 	'password'	=>'password',
 	'dbname'	=>'db_name'
