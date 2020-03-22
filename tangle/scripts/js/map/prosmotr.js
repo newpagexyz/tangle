@@ -13,7 +13,7 @@ var N=0;
  var B=B_GLOBAL;/////////////////////////////////////////
 
 button2.onclick=function(){
-	for(var i=0;i<2;i++)
+	for(var i=0;i<M.length;i++)
 	{
 		flag=1;
 	addDraggableMarker(map, behavior,i);
@@ -54,7 +54,7 @@ var defaultLayers = platform.createDefaultLayers();
 //Step 2: initialize a map - this map is centered over Berlin
 var map = new H.Map(mapContainer,
   defaultLayers.vector.normal.map,{
-  center: {lat:59.775133, lng:30.446503},
+  center: {lat:M[0].lat, lng:M[0].lng},
   zoom: 13,
   pixelRatio: window.devicePixelRatio || 1
 });
@@ -189,7 +189,77 @@ var svgMarkup = '<svg width="24" height="24" ' +
 }
 
 
-function aaa(){             
+
+  
+  
+   
+
+
+
+
+  // disable the default draggability of the underlying map
+  // and calculate the offset between mouse and target's position
+  // when starting to drag a marker object:
+  map.addEventListener('dragstart', function(ev) {
+    var target = ev.target,
+        pointer = ev.currentPointer;
+		
+    if (target instanceof H.map.Marker) {
+      var targetPosition = map.geoToScreen(target.getGeometry());
+      target['offset'] = new H.math.Point(pointer.viewportX - targetPosition.x, pointer.viewportY - targetPosition.y);
+      console.log(target.getGeometry());
+	  behavior.disable();
+    }
+  }, false);
+
+
+  // re-enable the default draggability of the underlying map
+  // when dragging has completed
+  map.addEventListener('dragend', function(ev) {
+    var target = ev.target;
+    if (target instanceof H.map.Marker) {
+      behavior.enable();
+    }
+  }, false);
+
+  // Listen to the drag event and move the position of the marker
+  // as necessary
+   map.addEventListener('drag', function(ev) {
+    var target = ev.target,
+        pointer = ev.currentPointer;
+		
+    if (target instanceof H.map.Marker) {
+		var c=target.getGeometry();
+      target.setGeometry(map.screenToGeo(pointer.viewportX - target['offset'].x, pointer.viewportY - target['offset'].y));
+	
+	for(var i=0;i<M.length;i++)
+	{
+		
+		if(c.lat==M[i].lat && c.lng==M[i].lng)
+		{
+			M[i]=target.getGeometry();
+			break;
+		}
+	}
+	}
+  }, false);
+}
+
+
+var svgMarkup = '<svg width="24" height="24" ' +
+    'xmlns="http://www.w3.org/2000/svg">' +
+    '<rect stroke="white" fill="#1b468d" x="1" y="1" width="22" ' +
+    'height="22" /><text x="12" y="18" font-size="12pt" ' +
+    'font-family="Arial" font-weight="bold" text-anchor="middle" ' +
+    'fill="white">H</text></svg>';
+	
+
+
+function aaa(){    
+
+
+console.log('aaa');
+         
 /**
  * * Calculates and displays a public trasnsport route from the Fernsehturm in Berlin
  * to Kurfürstendamm in the west of the city
@@ -426,72 +496,6 @@ for(var i=0; i<M.length-1;i++)
 }
 
 } 
-  
-  
-   
-
-
-
-
-  // disable the default draggability of the underlying map
-  // and calculate the offset between mouse and target's position
-  // when starting to drag a marker object:
-  map.addEventListener('dragstart', function(ev) {
-    var target = ev.target,
-        pointer = ev.currentPointer;
-		
-    if (target instanceof H.map.Marker) {
-      var targetPosition = map.geoToScreen(target.getGeometry());
-      target['offset'] = new H.math.Point(pointer.viewportX - targetPosition.x, pointer.viewportY - targetPosition.y);
-      console.log(target.getGeometry());
-	  behavior.disable();
-    }
-  }, false);
-
-
-  // re-enable the default draggability of the underlying map
-  // when dragging has completed
-  map.addEventListener('dragend', function(ev) {
-    var target = ev.target;
-    if (target instanceof H.map.Marker) {
-      behavior.enable();
-    }
-  }, false);
-
-  // Listen to the drag event and move the position of the marker
-  // as necessary
-   map.addEventListener('drag', function(ev) {
-    var target = ev.target,
-        pointer = ev.currentPointer;
-		
-    if (target instanceof H.map.Marker) {
-		var c=target.getGeometry();
-      target.setGeometry(map.screenToGeo(pointer.viewportX - target['offset'].x, pointer.viewportY - target['offset'].y));
-	
-	for(var i=0;i<M.length;i++)
-	{
-		
-		if(c.lat==M[i].lat && c.lng==M[i].lng)
-		{
-			M[i]=target.getGeometry();
-			break;
-		}
-	}
-	}
-  }, false);
-}
-
-
-var svgMarkup = '<svg width="24" height="24" ' +
-    'xmlns="http://www.w3.org/2000/svg">' +
-    '<rect stroke="white" fill="#1b468d" x="1" y="1" width="22" ' +
-    'height="22" /><text x="12" y="18" font-size="12pt" ' +
-    'font-family="Arial" font-weight="bold" text-anchor="middle" ' +
-    'fill="white">H</text></svg>';
-	
-
-
-
 
 
 

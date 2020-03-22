@@ -43,6 +43,14 @@
 		<div class='fourth-block'>
 		<hr style='visibility:hidden'>
 		</div>
+		<div class='five-block'>
+			 <h1><i class='blue'>Наше</i> приложение<br> для <i class='green'>вашего</i> удобства</h1>
+			 <!--<nav>
+				<h2>Удобно<br>Всегда под рукой<br>Есть оффлайн-режим<br>Ещё больше баллов<br></h2>
+			 </nav>-->
+			 <img src="media/index/qr.png" alt="logo" width="500px">
+			 <a href='apk/'>Скачать</a>
+		</div>
 		<footer>
 			<hr>
 			<p>Developed by &#171;NewPage1	&#187; &copy;2020</p>

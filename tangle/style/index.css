@@ -37,6 +37,7 @@ body
 	width:100%;
 }
 .fourth-block{
+	 box-shadow: 0 0 10px rgba(0,0,0,0.5);
 	background:url('../media/index/nashivozmozhnosti-01.png') 100% 100% no-repeat;
 	background-position: bottom;
 	background-size: contain;
@@ -134,3 +135,35 @@ footer{
 	font-size:200%;
 	padding:15px;
 }
+.blue{
+	font-style:normal;
+	color:#1480B5;
+}
+.green{
+	font-style:normal;
+	color:#8EC63D;
+}
+
+.five-block nav{
+	text-align:center;
+	width:50vw;
+	margin-left:1vw;
+}
+.five-block img{
+	margin-left:40vw;
+}
+.five-block a{
+	margin-top:10vh;
+	margin-left:40vw;
+}
+.five-block{
+	height:100vh;
+	background-color:#363641;
+	/*background:url('../media/index/pril-01.png') center;
+	background-size:cover;*/
+}
+
+
+
+
+

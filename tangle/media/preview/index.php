@@ -1,29 +1,12 @@
 <?php
 	include_once('../tech/fun.php');
-	$page='create_way';
-	if(!check_cookie()){
-		create_refer_cookie(' https://newpage.ddns.net/tangle/create_way/');
-		header('Location: http://newpage.ddns.net/tangle/auth/');
-		exit;
-	}
+	$page='map';
 ?>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta charset='utf-8'>
-		<title>
-			<?php
-				echo $texts[$page]['title'];
-			?>
-		</title>
-				<link rel="shortcut icon" href="../media/logo/favico.png" type="image/x-icon">
-		<link rel='stylesheet' type='text/css' href='../style/list.css'>
-		<link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
-   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
-    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
-   <style>
+		<style>
 			.My_window{
 					visibility:hidden;
 					width:0px;
@@ -31,6 +14,8 @@
 					position: fixed;
 					top:10%;
 				}
+		</style>
+		<style type="text/css">
       .directions li span.arrow {
         display:inline-block;
         min-width:28px;
@@ -180,56 +165,42 @@
         background-position:-1316px;
       }
       </style>
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes">
+    <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+    <title>Map with Route from A to B using Public Transport</title>
+    <link rel="stylesheet" type="text/css" href="https://js.api.here.com/v3/3.1/mapsjs-ui.css" />
+   <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-core.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-service.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-ui.js"></script>
+    <script type="text/javascript" src="https://js.api.here.com/v3/3.1/mapsjs-mapevents.js"></script>
+		<title>
+			<?php
+				echo $texts[$page]['title'];
+			?>
+		</title>
 		<link rel="shortcut icon" href="../media/logo/favico.png" type="image/x-icon">
-		<link rel='stylesheet' type='text/css' href='../style/create_way.css'>
+		<link rel='stylesheet' type='text/css' href='../style/map.css'>
 	</head>
 	<body id="map-with-route">
-	
-	<header>
-				<div>
-				Создание маршрута
-				</div>
-				
-	</header>
-	  <div class='My_window' id='My_window'>
-	  <input type='text' id='text1' value='Enter text'>
-	  <button id='button1'>Дать название метке</button>
-	</div>
-	<main class='b'>
-	 <input class='btn'type="button" id="btnAdd"  value="добавить маркер">
-			<div class="mapp" style="width: 70%; height: 70vh" id="mapContainer">
-            </div>
-	</main>
-	
-	
-	
-	
-	
-	
-    <div class="page-header">
- 
-  
-  <div id="panel"></div>
-
-  <form id='f1' action='' method='post'>
-  <label for="name"><b>Название маршрута</b></label>
-	<input  class='fr'type='text' id='name' name='name' value='way1'><br>
-	<label for="name"><b>Аннотация</b></label>
-	<input class='fr'type='text' id='title' name='title' value='title1'><br>
-	<label for="name"><b>Полное описание</b></label>
-	<textarea class='fr'rows='10'id='long_text' name='long_text' value='long_text1'>long_text</textarea><br>
-	<label for="name"><b>Время планируемая на маршрут</b></label>
-	<input class='fr'type='number' id='time' name='time' value='1'><br>
-	<label for="name"><b>Тип(веший, вело, общ.транспорт, автомобиль)</b></label>
-	<input class='fr'type='text' id='number' name='type' value='1'><br> 
-	</form>
-	<button id='button2'>Соединить точки</button>
-	<h3></h3>
-	<script src='../scripts/js/create_way/karta.js'></script>
-		<script src='../scripts/js/create_way/demo.js'></script>
 		<?php
-			create_way_by_post();
-			?>
-	</body>
-</html>
+			if(isset($_GET['id'])){
+				map_to_js_object($_GET['id']);
+			}
+			else{
+					header('Location: https://newpage.ddns.net/tangle/list');
+			}
+		?>
 
+    <div class="page-header">
+  <div style="width: 640px; height: 480px" id="mapContainer">
+  </div>
+  <div id="panel"></div>
+  <div class='My_window' id='My_window'>
+
+	</div>
+  
+	<button id='button2'>draw</button>
+	<h3></h3>
+	<script src='../scripts/js/map/prosmotr.js'></script>
+	</body>
+</html>      

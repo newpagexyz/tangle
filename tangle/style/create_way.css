@@ -1,0 +1,76 @@
+*{
+	font-family: TruthCYR Regular Regular;
+
+	margin:0px;
+	padding:0px;
+	
+
+}
+@font-face {
+	font-family: TruthCYR Regular Regular;
+	src: url('../fonts/truthcyr-regular_bigfontsite.com.otf');
+}
+body
+{
+	background-image: url('../media/img/punktir-01.png');
+	background:url('../media/index/punktir-01.png') 100% 10% no-repeat;
+	background-size:cover;
+}
+header{
+	padding:5vh 0px;
+	width:100%;
+	margin-top:-2vh;
+	border-radius:3%;
+	background:#363641;
+	
+}
+header div{
+	width:50%;
+	height:10vh;
+	font-size:5.5vh;
+	padding:4vh 0 0 0;
+	margin-left:25vw;
+	text-align:center;
+	color:#FFFFFF;
+	background:#1480B5;
+	border-radius:60px;
+}
+.b
+{
+	height:70vh;
+	padding-top:5%;
+	padding-bottom:5%;
+	width:100%;
+
+	
+	
+	
+}
+.mapp{
+	padding:5vh 0px;
+	width:100%;
+	margin-top:-2vh;
+	margin-left:15vw;
+	border-radius:50%;
+	/*background:white;*/
+}
+.fr{
+    width: 50%;
+    padding: 15px;
+    text-align: left;
+    margin: 5px 25% 22px 25%;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+label{   
+
+
+margin: 5px 0 22px 25%;
+/*color: black;*/
+text-align: center;
+
+	
+}
+
+}
