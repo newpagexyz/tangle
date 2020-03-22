@@ -1,3 +1,69 @@
+*{
+	font-family: TruthCYR Regular Regular;
+}
+@font-face {
+	font-family: TruthCYR Regular Regular;
+	src: url('../fonts/truthcyr-regular_bigfontsite.com.otf');
+}
 img{
 	width:30%;
+}
+header{
+	padding:5vh 0px;
+	width:100%;
+	margin-top:-2vh;
+	border-radius:3%;
+	background:#363641;
+}
+header div{
+	width:50%;
+	height:10vh;
+	font-size:5.5vh;
+	padding:4vh 0 0 0;
+	margin-left:20vw;
+	text-align:center;
+	color:#FFFFFF;
+	background:#1480B5;
+	border-radius:40px;
+}
+main{
+	min-height:50vh;	
+}
+main h1:last-child{
+	margin-left:5%;
+}
+main h1:first-child{
+	text-align:center;
+}main h1{
+	font-size:5vh;
+	margin-bottom:10vh;
+}
+main .show_images{
+	margin-bottom:10vw;
+}
+main ul{
+	margin-left:5%;
+	width:90%;
+	border-radius:10px;
+	height:5vw;
+	list-style-type:none;
+	background:#EDEFEF;
+}
+main ul li{
+	margin-top:-5vw;
+	float:right;
+	width:20vw;
+	margin-right:2%;
+}
+main img{
+	width:70%;
+}
+.filter{
+	margin-left:4.5%;
+	background-color:#363641;
+	border-radius:10px;
+	width:15vw;
+	font-size:4vw;
+	padding:1vh;
+	color:#FFFFFF;
 }

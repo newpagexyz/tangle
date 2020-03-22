@@ -16,6 +16,9 @@
 		<link rel='stylesheet' type='text/css' href='style/header.css'>
 	</head>
 	<body>
+		<?php
+			include_once('modules/header.php');
+		?>
 		<div class='first-block'>
 			<div class='blackback'>
 			<video width="100%" poster="media/index/video_preview.png" id='main_video' muted="muted">
@@ -24,9 +27,6 @@
 			</div>
 			<script src='scripts/js/index/video_controls.js'></script>
 		</div>
-		<?php
-			include_once('modules/header.php');
-		?>
 		<div class='second-block'>
 		
 		<h1>Придумывайте маршруты<br>и изучайте местность с <b>Tangle<b></h1>

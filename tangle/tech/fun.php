@@ -85,7 +85,7 @@
 				'session'=>$session,
 				'token'=>$token,
 			);
-			return json_encode($array);
+			return json_encode($array , JSON_UNESCAPED_UNICODE);
 		}else{
 			return false;
 		}
@@ -103,7 +103,6 @@
 			$res=my_query('INSERT INTO `api_session` SET session="'.$session.'", token="'.$token.'",user_id="'.$id.'";',array(0=>$session,1=>$token));
 	}
 	function create_way($name, $title,$long_text,$time,$type,$uid){//Создаёт маршрут без точек и возвращает его id
-		echo 'INSERT INTO `way` SET name="'.$name.'", short_text="'.$title.'",user_id="'.$uid.'", long_text="'.$long_text.'", time="'.intval($time).'", type="'.intval($type).'";';
 		$res=my_query('INSERT INTO `way` SET name="'.$name.'", short_text="'.$title.'",user_id="'.$uid.'", long_text="'.$long_text.'", time="'.intval($time).'", type="'.intval($type).'";',array(0=>$name,1=>$title,2=>$long_text,3=>$time,4=>$type));
 		$res=my_query('SELECT `id` FROM `way` WHERE name="'.$name.'" AND short_text="'.$title.'" AND user_id="'.$uid.'" AND long_text="'.$long_text.'" AND time="'.intval($time).'" AND type="'.intval($type).'";',array(0=>$name,1=>$title,2=>$long_text,3=>$time,4=>$type));
 		$r=mysqli_fetch_assoc($res);
@@ -148,15 +147,15 @@
 		$i=0;
 		$arr=array();
 		while($r=mysqli_fetch_assoc($res)){
-			$arr[$i]['lat']=$r['lat'];
-			$arr[$i]['alt']=$r['alt'];
-			$arr[$i]['title']=$r['title'];
+			$arr[$i]['lat']=html_entity_decode($r['lat'], ENT_NOQUOTES, 'UTF-8');
+			$arr[$i]['alt']=html_entity_decode($r['alt'], ENT_NOQUOTES, 'UTF-8');
+			$arr[$i]['title']=html_entity_decode($r['title'], ENT_NOQUOTES, 'UTF-8');
 			$i++;
 		}
 		if($i==0){
 			return "not found";	
 		}else{
-			$ret= json_encode($arr);
+			$ret= json_encode($arr , JSON_UNESCAPED_UNICODE);
 			$ret =substr($ret, 1,-1); 
 			return $ret;
 		}
@@ -174,18 +173,18 @@
 		while($r=mysqli_fetch_assoc($res)){
 			$i++;
 			$arr[$i]['id']=$r['id'];
-			$arr[$i]['title']=$r['short_text'];
-			$arr[$i]['img_src']=$r['preview_src'];
-			$arr[$i]['rate']=$r['rate'];
+			$arr[$i]['title']=html_entity_decode($r['short_text'], ENT_NOQUOTES, 'UTF-8');
+			$arr[$i]['img_src']=html_entity_decode($r['preview_src'], ENT_NOQUOTES, 'UTF-8');
+			$arr[$i]['rate']=html_entity_decode($r['rate'], ENT_NOQUOTES, 'UTF-8');
 		}
 		if($i==0){
 			return "not found";	
 		}else{
-			$ret= json_encode($arr);
+			$ret= json_encode($arr , JSON_UNESCAPED_UNICODE);
 			return $ret;
 		}
 	}
-	function map_list($key){
+	function map_list($key){//Выводит список карт в графическом виде
 		$ret=get_ways($key);
 		$arr= json_decode($ret,1);
 		foreach($arr as $value){
@@ -196,10 +195,10 @@
 			echo"</div>";
 		}
 	}
-	function create_refer_cookie($link){
+	function create_refer_cookie($link){//Создёт куки для возврата
 		setcookie("refer", $link, time()+3600000, "/");
 	}
-	function goto_refer_cookie(){
+	function goto_refer_cookie(){//Перейти на рефер ссылку
 		$ref='Location: http://newpage.ddns.net/tangle/';
 		if(isset($_COOKIE["refer"])){
 			$ref='Location: '.$_COOKIE["refer"];
@@ -209,7 +208,7 @@
 		header($ref);
 		exit();
 	}
-	function deauth(){
+	function deauth(){//Деавторизовать юзера
 		if(isset($_COOKIE['sesion'])){
 			unset($_COOKIE['session']);
 			setcookie('session', null, -1, '/');
@@ -220,7 +219,7 @@
 		}
 		header('Location: https://newpage.ddns.net/tangle/');
 	}
-	function ret_name_by_cookie(){
+	function ret_name_by_cookie(){//Вернуть имя по куки
 		$ret=false;
 		if(isset($_COOKIE['session']) AND isset($_COOKIE['token'])){
 			$session=$_COOKIE['session'];
@@ -235,11 +234,35 @@
 		}
 		return $ret;
 	}
-	function find_way($keywords){
+	function find_way($keywords){//Поиск <!--Пока не работает-->
 		if($res=my_query('SELECT * FROM `way` WHERE `text` like "%'.$text.'%";',array(0=>$text))){
 			while($r=mysqli_fetch_assoc($res)){
 				
 			}
 		}
+	}
+	function map_to_js_object($id){
+		$arr=json_decode("[".get_map_json($id)."]",1);
+		$m="[";
+		$b="[";
+		$f=false;
+		foreach($arr as $val){
+			if($f){
+			$m=$m.",";
+			$b=$b.",";	
+			}
+			else{
+				$f=true;
+			}
+			$m=$m."{lat:".$val['lat'].",lng:".$val['alt']."}";
+			$b=$b."'".$val['title']."'";
+		}
+		$m=$m."]";
+		$b=$b."]";
+		echo"
+		<script>
+			var M_GLOBAL=".$m.";
+			var B_GLOBAL=".$b.";
+		</script>";
 	}
 ?>

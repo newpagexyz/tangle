@@ -3,6 +3,31 @@ var platform = new H.service.Platform({
   apikey: 'LPmNvbdt1t_Qlp7NBD_6NdqoHUVS2Pw8ToCUQWfpq34',
   useHTTPS: true
 });
+
+
+var flag=1;
+var  M=M_GLOBAL;//////////////////////////////////////////////////
+
+var N=0;
+ var flag2=0;
+ var B=B_GLOBAL;/////////////////////////////////////////
+
+button2.onclick=function(){
+	for(var i=0;i<2;i++)
+	{
+		flag=1;
+	addDraggableMarker(map, behavior,i);
+	}
+	
+	
+	if(M.length>1)
+  {aaa();}
+
+
+
+}
+
+	
                   
 /**
  * * Calculates and displays a public trasnsport route from the Fernsehturm in Berlin
@@ -29,7 +54,7 @@ var defaultLayers = platform.createDefaultLayers();
 //Step 2: initialize a map - this map is centered over Berlin
 var map = new H.Map(mapContainer,
   defaultLayers.vector.normal.map,{
-  center: {lat:52.5160, lng:13.3779},
+  center: {lat:59.775133, lng:30.446503},
   zoom: 13,
   pixelRatio: window.devicePixelRatio || 1
 });
@@ -74,11 +99,7 @@ function openBubble(position, text){
 
                   
              
-var flag=1;;
-var  M=[];
-var N=0;
- var flag2=0;
- var B=[];
+
  
  // Obtain the default map types from the platform object:
 var defaultLayers = platform.createDefaultLayers();
@@ -111,9 +132,12 @@ map.addObject(group);
 
 
 
-function addDraggableMarker(map, behavior){
+function addDraggableMarker(map, behavior,i){
 
 group.addEventListener('tap', function (evt) {
+	
+	console.log(i);
+	
     // event target is the marker itself, group is a parent event target
     // for all objects that it contains
 	
@@ -133,9 +157,8 @@ if(flag==1)
 	
 	
 	
-   var  marker = new H.map.Marker(map.getCenter());
-	M.push(map.getCenter());
-console.log(M);
+   var  marker = new H.map.Marker({lat:M[i].lat, lng:M[i].lng});
+
 flag=0;
 console.log('create');
 
@@ -146,7 +169,7 @@ var svgMarkup = '<svg width="24" height="24" ' +
     '<rect stroke="white" fill="#1b468d" x="1" y="1" width="22" ' +
     'height="22" /><text x="12" y="18" font-size="12pt" ' +
     'font-family="Arial" font-weight="bold" text-anchor="middle" ' +
-    'fill="white">'+M.length.toString()+'</text></svg>';
+    'fill="white">'+(i+1).toString()+'</text></svg>';
 /// здесь дожен создаваться  html из которых заберетсяя текст в пузырики
  My_window.style.visibility='visible';
  My_window.style.height = '100px';
@@ -154,38 +177,19 @@ var svgMarkup = '<svg width="24" height="24" ' +
   console.log(marker.viewportX);
   var icon = new H.map.Icon(svgMarkup);
 
-   marker = new H.map.Marker(map.getCenter(), {icon: icon});
-  button1.onclick=function()
-{
-	My_window.style.visibility='hidden';
-	 marker.setData(text1.value);   /// здесь дожен забрать надписи из html файлов
+   marker = new H.map.Marker({lat:M[i].lat, lng:M[i].lng}, {icon: icon});
+
+	 marker.setData(B[i]);   /// здесь дожен забрать надписи из html файлов
   // Ensure that the marker can receive drag events
  
-B.push(text1.value);
- marker.draggable = true;
+ marker.draggable = false;
   group.addObject(marker);
   
-}
-  //add_input(alt,lat,title);
-}
-button2.onclick=function(){
-	button2.style.visibility='hidden';
-	if(M.length>1)
-  {aaa();}
+
 }
 
-function createForm(item, index) {
-	f1.innerHTML+='<input type="text" name="lat'+index+'" style="visibility:hidden; width:0px; height:0px;" value="'+M[index]['lat']+'">';
-	f1.innerHTML+='<input type="text" name="alt'+index+'" style="visibility:hidden; width:0px; height:0px;" value="'+M[index]['lng']+'">';
-	f1.innerHTML+='<input type="text" name="tit'+index+'" style="visibility:hidden; width:0px; height:0px;" value="'+B[index]+'">';
-}	
 
-function aaa(){
-	
-M.forEach(createForm);
-f1.innerHTML+='<input type="submit" value="Подтвердите маршрут">';
-
-             
+function aaa(){             
 /**
  * * Calculates and displays a public trasnsport route from the Fernsehturm in Berlin
  * to Kurfürstendamm in the west of the city
@@ -490,14 +494,9 @@ var svgMarkup = '<svg width="24" height="24" ' +
 
 
 
-btnAdd.onclick=function()
-{
-	
-	flag=1;
-	addDraggableMarker(map, behavior);
 
-N++;	
-};
+	
+
 
 
 
