@@ -174,6 +174,7 @@
 			$i++;
 			$arr[$i]['id']=$r['id'];
 			$arr[$i]['title']=html_entity_decode($r['short_text'], ENT_NOQUOTES, 'UTF-8');
+			$arr[$i]['text']=html_entity_decode($r['long_text'], ENT_NOQUOTES, 'UTF-8');
 			$arr[$i]['img_src']=html_entity_decode($r['preview_src'], ENT_NOQUOTES, 'UTF-8');
 			$arr[$i]['rate']=html_entity_decode($r['rate'], ENT_NOQUOTES, 'UTF-8');
 		}
@@ -188,10 +189,10 @@
 		$ret=get_ways($key);
 		$arr= json_decode($ret,1);
 		foreach($arr as $value){
-			echo "<div>";
-				echo"<a href='../map/?id=".$value['id']."'>".$value['title']."
-					</a>";
-					echo"<img src='".$value['img_src']."'>";
+			echo "<div class='map-show'>";
+				echo"<a href='../map/?id=".$value['id']."'><h1>".$value['title']."</h1>
+					";
+					echo"<pre>".$value['text']."</pre><img src='".$value['img_src']."'></a>";
 			echo"</div>";
 		}
 	}
@@ -241,7 +242,7 @@
 			}
 		}
 	}
-	function map_to_js_object($id){
+	function map_to_js_object($id){//Передать в js координаты
 		$arr=json_decode("[".get_map_json($id)."]",1);
 		$m="[";
 		$b="[";

@@ -1,8 +1,8 @@
 <?php
 	$mysql=array(
-	'host'		=>'host',
-	'user'		=>'user',
-	'password'	=>'password',
-	'dbname'	=>'db_name'
+	'host'		=>'127.0.0.1',
+	'user'		=>'tangle_user',
+	'password'	=>'12345',
+	'dbname'	=>'tangle'
 	);
 ?>

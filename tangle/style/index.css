@@ -25,6 +25,11 @@ body
 	background:url('../media/index/vanya_podlozhka-01.png') 100% 100% no-repeat;
 	background-size:cover;
 }
+.third-block .helper div{
+	margin-top:-3vh;
+	float:left;
+	margin-left:25vw;
+}
 .third-block{
 	background:url('../media/index/karta-01.png') 100% 100% no-repeat;
 	background-size:cover;
@@ -100,8 +105,8 @@ a:hover {
   text-decoration: none;
   outline: none;
   display: inline-block;
-  width: 280px;
-  height: 45px;
+  min-width: 200px;
+  min-height: 45px;
   line-height: 45px;
   border-radius: 20px;
   margin: 5px 1px;

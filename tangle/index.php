@@ -34,9 +34,10 @@
 		<p><g>Выбирайте из более 10000 маршрутов<g><p>
 		</div>
 		<div class='third-block'>
-		<ul>
-			<li>	<div class='button'><a class='a1' href='create_way/'>Создать маршрут</a></div></li>
-			<li>	<div class='button'><a class='a1' href='apk/'>Попробовать</a></div></li>
+			<div class='helper'>
+				<div class='button'><a class='a1' href='create_way/'>Создать маршрут</a></div>
+				<div class='button'><a class='a1' href='apk/'>Попробовать</a></div>
+			</div>
 		</ul>
 		</div>
 		<div class='fourth-block'>
