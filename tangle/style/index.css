@@ -22,11 +22,20 @@ body
 	height:100vh;
 	width:100%;
 	background-image: url('../media/img/vanya_podlozhka-01.png');
-	
-	
+	background:url('../media/index/vanya_podlozhka-01.png') 100% 100% no-repeat;
+	background-size:cover;
 }
 .third-block{
+	background:url('../media/index/karta-01.png') 100% 100% no-repeat;
+	background-size:cover;
 	height:100vh;
+	width:100%;
+}
+.fourth-block{
+	background:url('../media/index/nashivozmozhnosti-01.png') 100% 100% no-repeat;
+	background-position: bottom;
+	background-size: contain;
+	height:120vh;
 	width:100%;
 }
 @font-face {
@@ -86,7 +95,7 @@ a:hover {
   transform: translateY(-7px);
 }
 
-a1 {
+.a1 {
 	font-family: TruthCYR Regular Regular;
   text-decoration: none;
   outline: none;
@@ -107,9 +116,16 @@ a1 {
   box-shadow: 0 8px 15px rgba(0,0,0,.1);
   transition: .3s;
 }
-a1:hover {
+.a1:hover {
   background: #0e80b5;
   box-shadow: 0 15px 20px #0e80b5;
   color: white;
   transform: translateY(-7px);
+}
+footer hr{
+	margin-bottom:15px;
+}
+footer{
+	font-size:200%;
+	padding:15px;
 }

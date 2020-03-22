@@ -18,7 +18,7 @@
 	<?php
 		if(isset($_POST['name'])AND isset($_POST['surname']) AND isset($_POST['email']) AND isset($_POST['psw'])){
 			if(reg_user($_POST['name'],$_POST['surname'],$_POST['email'],$_POST['psw'])){
-				echo "Пользователь успешно зарегистрирован!";
+				header('Location: http://newpage.ddns.net/tangle/auth/');
 			}
 			else{
 				echo"Ошибка, повторите попытку позднее";

@@ -56,6 +56,8 @@
 	function check_cookie(){//Проверка валидности сессии в браузере
 		$ret=false;
 		if(isset($_COOKIE['session']) AND isset($_COOKIE['token'])){
+			$session=$_COOKIE['session'];
+			$token=$_COOKIE['token'];
 			$res=my_query('SELECT * FROM `session` WHERE session="'.$session.'" AND token="'.$token.'";',array(0=>$session,1=>$token));
 			if($res=mysqli_fetch_assoc($res)){
 				$ret=true;
@@ -101,6 +103,7 @@
 			$res=my_query('INSERT INTO `api_session` SET session="'.$session.'", token="'.$token.'",user_id="'.$id.'";',array(0=>$session,1=>$token));
 	}
 	function create_way($name, $title,$long_text,$time,$type,$uid){//Создаёт маршрут без точек и возвращает его id
+		echo 'INSERT INTO `way` SET name="'.$name.'", short_text="'.$title.'",user_id="'.$uid.'", long_text="'.$long_text.'", time="'.intval($time).'", type="'.intval($type).'";';
 		$res=my_query('INSERT INTO `way` SET name="'.$name.'", short_text="'.$title.'",user_id="'.$uid.'", long_text="'.$long_text.'", time="'.intval($time).'", type="'.intval($type).'";',array(0=>$name,1=>$title,2=>$long_text,3=>$time,4=>$type));
 		$res=my_query('SELECT `id` FROM `way` WHERE name="'.$name.'" AND short_text="'.$title.'" AND user_id="'.$uid.'" AND long_text="'.$long_text.'" AND time="'.intval($time).'" AND type="'.intval($type).'";',array(0=>$name,1=>$title,2=>$long_text,3=>$time,4=>$type));
 		$r=mysqli_fetch_assoc($res);
@@ -112,7 +115,7 @@
 		}
 	}
 	function get_id_by_session($session,$token){//Получить id по сессии
-		$res=my_query('SELECT * FROM `session` WHERE session="'.$session.'" AND token="'.$token.'";',array(0=>$session,1=>$token));
+		$res=my_query('SELECT * FROM `session` WHERE session="'.$session.'";',array(0=>$session,1=>$token));
 		if($r=mysqli_fetch_assoc($res)){
 			return $r['user_id'];
 		}
@@ -140,7 +143,7 @@
 			}
 		}
 	}
-	function get_map_json($id){
+	function get_map_json($id){//Получить json для карты по id
 		$res=my_query('SELECT * FROM `points` WHERE way_id="'.$id.'";',array(0=>$id));
 		$i=0;
 		$arr=array();
@@ -153,7 +156,90 @@
 		if($i==0){
 			return "not found";	
 		}else{
-			return json_encode($arr);
+			$ret= json_encode($arr);
+			$ret =substr($ret, 1,-1); 
+			return $ret;
+		}
+	}
+	function get_ways($key='new'){
+		/*if($key=='pop'){
+				$res=my_query('SELECT * FROM `way` ORDER BY `rate` DESC;');
+		}
+		else($key=='new'){
+				$res=my_query('SELECT * FROM `way` ORDER BY `id` DESC;');
+		}*/
+		$res=my_query('SELECT * FROM `way` ORDER BY `rate` DESC;');
+		$i=0;
+		$arr=array();
+		while($r=mysqli_fetch_assoc($res)){
+			$i++;
+			$arr[$i]['id']=$r['id'];
+			$arr[$i]['title']=$r['short_text'];
+			$arr[$i]['img_src']=$r['preview_src'];
+			$arr[$i]['rate']=$r['rate'];
+		}
+		if($i==0){
+			return "not found";	
+		}else{
+			$ret= json_encode($arr);
+			return $ret;
+		}
+	}
+	function map_list($key){
+		$ret=get_ways($key);
+		$arr= json_decode($ret,1);
+		foreach($arr as $value){
+			echo "<div>";
+				echo"<a href='../map/?id=".$value['id']."'>".$value['title']."
+					</a>";
+					echo"<img src='".$value['img_src']."'>";
+			echo"</div>";
+		}
+	}
+	function create_refer_cookie($link){
+		setcookie("refer", $link, time()+3600000, "/");
+	}
+	function goto_refer_cookie(){
+		$ref='Location: http://newpage.ddns.net/tangle/';
+		if(isset($_COOKIE["refer"])){
+			$ref='Location: '.$_COOKIE["refer"];
+			unset($_COOKIE['refer']);
+			setcookie('refer', null, -1, '/');
+		}
+		header($ref);
+		exit();
+	}
+	function deauth(){
+		if(isset($_COOKIE['sesion'])){
+			unset($_COOKIE['session']);
+			setcookie('session', null, -1, '/');
+		}
+		if(isset($_COOKIE['token'])){
+			unset($_COOKIE['token']);
+			setcookie('token', null, -1, '/');
+		}
+		header('Location: https://newpage.ddns.net/tangle/');
+	}
+	function ret_name_by_cookie(){
+		$ret=false;
+		if(isset($_COOKIE['session']) AND isset($_COOKIE['token'])){
+			$session=$_COOKIE['session'];
+			$token=$_COOKIE['token'];
+			$res=my_query('SELECT * FROM `session` WHERE session="'.$session.'";',array(0=>$session,1=>$token));
+			if($res=mysqli_fetch_assoc($res)){
+				$res=my_query('SELECT * FROM `users` WHERE id="'.$res['user_id'].'";');
+				if($res=mysqli_fetch_assoc($res)){
+					$ret=$res['name'];
+				}
+			}
+		}
+		return $ret;
+	}
+	function find_way($keywords){
+		if($res=my_query('SELECT * FROM `way` WHERE `text` like "%'.$text.'%";',array(0=>$text))){
+			while($r=mysqli_fetch_assoc($res)){
+				
+			}
 		}
 	}
 ?>

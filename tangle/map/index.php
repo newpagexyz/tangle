@@ -25,12 +25,12 @@
 		<link rel='stylesheet' type='text/css' href='../style/auth.css'>
 	</head>
 	<body>
-		 <div style="width: 640px; height: 480px" id="mapContainer">
+		 <div style="width: 90%; height: 90%;margin:5% auto auto 5%"  id="mapContainer">
    <script>
 
 	    window.onload=function(){
  var platform = new H.service.Platform({
-  'apikey': '{JS_API_KEY}'
+  'apikey': '{Xr86olRRYlJEGra77BlgSuDnyQaiQKvkjqZ_L88aFoo}'
 });
  
  // Obtain the default map types from the platform object:

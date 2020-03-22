@@ -35,13 +35,16 @@
 		</div>
 		<div class='third-block'>
 		<ul>
-			<li>	<div class='button'><a1 href='#'>Создать маршрут</a1></div></li>
-			<li>	<div class='button'><a1 href='#'>Попробовать</a1></div></li>
+			<li>	<div class='button'><a class='a1' href='create_way/'>Создать маршрут</a></div></li>
+			<li>	<div class='button'><a class='a1' href='apk/'>Попробовать</a></div></li>
 		</ul>
 		</div>
 		<div class='fourth-block'>
-		<h1>Наши возможности<h1>
-		
+		<hr style='visibility:hidden'>
 		</div>
+		<footer>
+			<hr>
+			<p>Developed by &#171;NewPage1	&#187; &copy;2020</p>
+		</footer>
 	</body>
 </html>
